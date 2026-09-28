@@ -11,6 +11,11 @@ pipeline {
                 sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
             }
         }
+        stage('Trivy scan') {
+	    steps {
+		sh 'trivy fs .'
+	    }
+	}
         stage('Run') {
             steps {
                 sh 'docker stop blog || true'
