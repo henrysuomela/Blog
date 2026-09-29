@@ -23,5 +23,10 @@ pipeline {
                 sh 'docker run -d -p 3000:3000 --name blog blog'
             }
         }
+	stage('Nikto scan') {
+	    steps {
+		sh 'nikto -h http://localhost:8080'	
+	    }
+	}
     }
 }
