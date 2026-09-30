@@ -81,6 +81,10 @@ describe('Blog application', () => {
                 password: 'password'
             });
 
+        console.log('STATUS:', response.statusCode);
+        console.log('LOCATION:', response.headers.location);
+        console.log('BODY:', response.text);
+
         expect(response.statusCode).toBe(302);
         expect(response.headers.location).toBe('/auth/login');
     });
