@@ -77,14 +77,11 @@ describe('Blog application', () => {
 
         const response = await request(app)
             .post('/auth/register')
+            .type('form')
             .send({
                 username: 'newuser',
                 password: 'password'
             });
-
-        console.log('STATUS:', response.statusCode);
-        console.log('LOCATION:', response.headers.location);
-        console.log('BODY:', response.text);
 
         expect(response.statusCode).toBe(302);
         expect(response.headers.location).toBe('/auth/login');
