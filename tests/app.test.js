@@ -1,11 +1,12 @@
 const request = require('supertest');
-const app = require('../app');
 
 jest.mock('../database', () => ({
     get: jest.fn(),
     all: jest.fn(),
     run: jest.fn()
 }));
+
+const app = require('../app');
 
 const db = require('../database');
 
