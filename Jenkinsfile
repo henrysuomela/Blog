@@ -6,14 +6,15 @@ pipeline {
                     sh 'git pull origin main'
                 }
             }
+            stage('Build') {
+                steps {
+                    sh 'npm install'
+                    sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
+                }
+            }
             stage('Tests') {
                 steps {
                     sh 'npm test'
-                }
-            }
-            stage('Build') {
-                steps {
-                    sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
                 }
             }
             stage('Trivy scan') {
