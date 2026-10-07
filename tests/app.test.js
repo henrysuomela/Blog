@@ -16,6 +16,10 @@ describe('Blog application', () => {
         jest.clearAllMocks();
     });
 
+    afterAll(() => {
+        db.close();
+    });
+
     test('GET / redirects anonymous users to login', async () => {
         const response = await request(app).get('/');
         expect(response.statusCode).toBe(302);
