@@ -17,7 +17,7 @@ describe('Blog application', () => {
     });
 
     afterAll(() => {
-        db.close(done);
+        db.close();
     });
 
     test('GET / redirects anonymous users to login', async () => {
