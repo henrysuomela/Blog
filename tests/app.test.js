@@ -14,6 +14,8 @@ describe('Blog application', () => {
 
     beforeEach(() => {
         jest.clearAllMocks();
+        db.all.mockImplementation((sql, cb) => cb(null, []));
+        db.run.mockImplementation((sql, params, cb) => cb(null));
     });
 
     test('GET / redirects anonymous users to login', async () => {
