@@ -34,23 +34,16 @@ app.use((req, res, next) => {
     }
 });
 
-app.use((req, res, next) => {
-    if (req.query.user) {
-        req.user = {
-            username: req.query.user
-        };
-    }
-    next();
-});
+
 
 app.use('/auth', authRoutes);
 
 app.get('/', (req, res) => {
-    /*
+    
     if (!req.user) {
         return res.redirect('/auth/login');
     }
-    */
+    
     db.all("SELECT * FROM posts", (err, rows) => {
         if (err) throw err;
         res.render('index', { title: 'My Blog', posts: rows, /*user: req.user*/ });
@@ -65,11 +58,11 @@ app.get('/new-post', (req, res) => {
 });
 
 app.post('/new-post', (req, res) => {
-  /*
+  
   if (!req.user) {
       return res.redirect('/auth/login');
   }
-  */
+  
   const { title, content } = req.body;
   db.run("INSERT INTO posts (title, content) VALUES (?, ?)", [title, content], (err) => {
       if (err) throw err;
@@ -78,11 +71,11 @@ app.post('/new-post', (req, res) => {
 });
 
 app.get('/admin', (req, res) => {
-  /*
+  
   if (!req.user || req.user.username !== 'admin') {
       return res.status(403).send('Access denied');
   }
-  */
+  
 
   res.render('admin', { title: 'Admin Page', user: req.user });
 });
